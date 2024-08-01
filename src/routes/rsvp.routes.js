@@ -6,7 +6,7 @@ import {
     updateRsvp, 
     createRsvp, 
     deleteRsvp
-} from '../controllers/rsvp.controller.js';   
+} from '../controllers/rsvp.controller.js'; 
 
 import { validateSchema } from "../middlewares/validator.middleware.js";
 import { createRsvpSchema } from "../schemas/rsvp.schema.js";

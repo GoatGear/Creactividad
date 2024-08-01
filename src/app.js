@@ -5,6 +5,7 @@ import cors from "cors";
 
 import authRoutes from "./routes/auth.routes.js";
 import rsvpRoutes from "./routes/rsvp.routes.js";
+import emailRoutes from "./routes/email.routes.js";
 
 const app = express();
 
@@ -18,5 +19,6 @@ app.use(cookieParser());
 
 app.use('/api', authRoutes);
 app.use('/api', rsvpRoutes);
+app.use('/api', emailRoutes);
 
 export default app

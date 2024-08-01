@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'
 import { createAccessToken } from '../libs/jwt.js'
 import jwt from "jsonwebtoken";
 import { TOKEN_SECRET } from "../config.js";
+import { sendConfirmationEmail } from '../services/email.service.js';
 
 export const register = async (req, res) => {
 
@@ -22,8 +23,10 @@ export const register = async (req, res) => {
             role,
         })
         const userSaved = await newUser.save();
+        await sendConfirmationEmail(userSaved);
+
         const token = await createAccessToken({ id: userSaved._id, role: userSaved.role });
-        res.cookie('token', token)
+        res.cookie('token', token);
         res.json({
             id: userSaved._id,
             username: userSaved.username,
@@ -51,7 +54,6 @@ export const login = async (req, res) => {
         if (!isMatch) return res.status(400).json({ message: "Contraseña incorrecta" });
 
         const token = await createAccessToken({ id: userFound._id, role: userFound.role });
-
         res.cookie('token', token)
         res.json({
             id: userFound._id,
@@ -82,7 +84,7 @@ export const profile = async (req, res) => {
         id: userFound._id,
         username: userFound.username,
         email: userFound.email,
-        role: userFound.role, 
+        role: userFound.role,
         createdAt: userFound.createdAt,
         updatedAt: userFound.updatedAt,
     });
@@ -90,12 +92,11 @@ export const profile = async (req, res) => {
 
 export const verifyToken = async (req, res) => {
     const { token } = req.cookies
-    if (!token) return res.status(401).json({ message: "No autorizado" });
+    if (!token) return res.status(401).json({ message: "No autorizado no tok" });
     jwt.verify(token, TOKEN_SECRET, async (err, user) => {
         if (err) return res.status(401).json({ message: 'No autorizado' });
         const userFound = await User.findById(user.id)
         if (!userFound) return res.status(401).json({ message: 'No autorizado' });
-
         return res.json({
             id: userFound._id,
             username: userFound.username,
