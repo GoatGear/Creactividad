@@ -1,5 +1,4 @@
 import { Resend } from 'resend';
-//const apikey = 're_A1TshSHw_HYscKvTCAiq17j38T8Cv54Wm'
 import { apikey } from '../config.js';
 
 

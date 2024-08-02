@@ -24,6 +24,7 @@ export const createRsvp = async (req, res) => {
             user: req.user.id,
         })
         const savedRsvp = await newRsvp.save()
+        // enviar correo req.user.email
         res.json(savedRsvp)
     } catch (error) {
         return res.status(404).json({ message: "No se logró" })

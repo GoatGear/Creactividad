@@ -23,6 +23,7 @@ export const register = async (req, res) => {
             role,
         })
         const userSaved = await newUser.save();
+
         await sendConfirmationEmail(userSaved);
 
         const token = await createAccessToken({ id: userSaved._id, role: userSaved.role });
