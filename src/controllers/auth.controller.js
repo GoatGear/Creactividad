@@ -1,31 +1,58 @@
-import User from '../models/user.model.js'
-import bcrypt from 'bcryptjs'
-import { createAccessToken } from '../libs/jwt.js'
+import User from '../models/user.model.js';
+import qrcode from "qrcode";
+import bcrypt from 'bcryptjs';
+import { createAccessToken } from '../libs/jwt.js';
 import jwt from "jsonwebtoken";
 import { TOKEN_SECRET } from "../config.js";
 import { sendConfirmationEmail } from '../services/email.service.js';
-
+import { buildPDF } from '../services/pdfQr.service.js';
+import fs from 'fs';
+import path from 'path';
 export const register = async (req, res) => {
-
-    const { email, password, username, role = 'user' } = req.body
+    const { email, password, username, role = 'user' } = req.body;
 
     try {
-
-        const userFound = await User.findOne({ email })
+        const userFound = await User.findOne({ email });
         if (userFound)
-            return res.status(400).json(["El correo ya esta en uso"]);
+            return res.status(400).json(["El correo ya está en uso"]);
 
-        const passwordHash = await bcrypt.hash(password, 10)
+        const passwordHash = await bcrypt.hash(password, 10);
         const newUser = new User({
             username,
             email,
             password: passwordHash,
             role,
-        })
+        });
         const userSaved = await newUser.save();
+        const qrCodeText = `${userSaved.id}`;
+        const qrCodeImage = await qrcode.toDataURL(qrCodeText); // Genera el QR como base64
+        userSaved.qrcodeImage = qrCodeImage; // Guarda el QR en base64
 
-        await sendConfirmationEmail(userSaved);
+        // Genera el PDF
+        const baseDir = 'src/services/';
+        const filePath = path.join(baseDir, 'qrcode', `pdf_${userSaved._id}.pdf`);
 
+        // Asegúrate de que el directorio existe
+        if (!fs.existsSync(path.dirname(filePath))) {
+            fs.mkdirSync(path.dirname(filePath), { recursive: true });
+        }
+
+        const writeStream = fs.createWriteStream(filePath);
+
+        await new Promise((resolve, reject) => {
+            buildPDF(userSaved, qrCodeImage, 
+                (data) => writeStream.write(data), 
+                async () => {
+                    writeStream.end();
+                    resolve(); // Resuelve la promesa cuando el PDF se completa
+                }
+            );
+        });
+
+        // Envía el correo de confirmación con el PDF adjunto
+        await sendConfirmationEmail(userSaved, filePath);
+
+        // Ahora crea el token y envía la respuesta al cliente
         const token = await createAccessToken({ id: userSaved._id, role: userSaved.role });
         res.cookie('token', token);
         res.json({
@@ -37,9 +64,12 @@ export const register = async (req, res) => {
             updatedAt: userSaved.updatedAt,
         });
     } catch (error) {
-        res.status(500);
+        res.status(500).json({ message: error.message });
     }
 };
+
+
+
 
 export const login = async (req, res) => {
 

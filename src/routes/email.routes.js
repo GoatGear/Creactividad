@@ -1,17 +1,37 @@
 import { Router } from "express";
 import { verifyToken } from '../controllers/auth.controller.js';
 import { createAccessToken } from '../libs/jwt.js';
+import { buildPDF } from '../services/pdfQr.service.js'
+import fs from 'fs';
+import path from 'path';
 
 const router = Router();
 
-router.post('/email', verifyToken, async (req, res) => {
-    try {
-        const token = await createAccessToken({ id: req.user.id, role: req.user.role });
-        res.cookie('token', token);
-        res.json({ message: 'Token generado y almacenado en cookies', token });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+
+router.get('/pdf', (req, res) => {
+    const baseDir = 'src/services/';
+    const filePath = path.join(baseDir, 'qrcode', 'pdfX.pdf');
+
+    const writeStream = fs.createWriteStream(filePath);
+
+    buildPDF(
+        (data) => writeStream.write(data), 
+        () => {
+            writeStream.end();
+            res.download(filePath, 'pdfX.pdf', (err) => {
+                if (err) {
+                    res.status(500).send({
+                        message: 'Error al descargar el archivo',
+                        error: err
+                    });
+                } else {
+                    console.log('PDF guardado y descargado exitosamente.');
+                }
+            });
+        }
+    );
 });
+
+
 
 export default router

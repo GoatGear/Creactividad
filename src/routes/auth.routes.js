@@ -12,5 +12,8 @@ router.post('/login', validateSchema(loginSchema), login);
 router.post('/logout', logout);
 router.get('/verify', verifyToken);
 router.get('/profile', authRequired, profile);
+router.get('/popi', (req, res) => {
+    return res.status(400).json({ message: "funcion que va a marcar asistencia" });
+});
 
 export default router
