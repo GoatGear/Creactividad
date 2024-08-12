@@ -6,12 +6,12 @@ const Navbar = () => {
     console.log("isAuthenticated:", isAuthenticated);
 
     return (
-        <nav className='bg-zinc-700 my-3 flex justify-between py-5 px-10 rounded-lg'>
+        <nav className='bg-white my-3 flex justify-between py-5 px-10 rounded-lg'>
            
                 <Link to={
                     isAuthenticated ? "/rsvps" : "/"
                 }>
-                     <h1 className='text-2xl font-bold text-white'>CreActividad</h1>
+                     <h1 className='text-2xl font-bold text-black-700'>CreActividad</h1>
                 </Link>
             <ul className='flex gap-x-4 items-center'>
                 {isAuthenticated ? (

@@ -20,7 +20,7 @@ function RegisterPage() {
 
   return (
     <div className='flex h-[calc(100vh-100px)] items-center justify-center'>
-      <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
+      <div className="bg-white max-w-md w-full p-10 rounded-md">
         {
           registerErrors.map((error, i) => (
             <div className="bg-red-500 p-2 text-white my-2" key={i}>
@@ -31,17 +31,17 @@ function RegisterPage() {
         <h1 className='text-2xl font-bold text-center'>Registrarme</h1>
         <form onSubmit={onSubmit}>
           <input type="text" {...register('username', { required: true })}
-            className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
+            className="w-full bg-gray-200 text-black px-4 py-2 rounded-md my-2"
             placeholder="Nombre"
           />
           {errors.username && (<p className="text-red-500" >Nombre de usuario requerido</p>)}
           <input type="email" {...register('email', { required: true })}
-            className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
+            className="w-full bg-gray-200 text-black px-4 py-2 rounded-md my-2"
             placeholder="Correo"
           />
           {errors.email && (<p className="text-red-500" >Correo requerido</p>)}
           <input type="password" {...register('password', { required: true })}
-            className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
+            className="w-full bg-gray-200 text-black px-4 py-2 rounded-md my-2"
             placeholder="Contraseña"
           />
           {errors.password && (<p className="text-red-500" >Contraseña requerida</p>)}
@@ -49,7 +49,7 @@ function RegisterPage() {
         </form>
         <p className=" flex gap-x-2 justify-between">
           ¿Ya tienes una cuenta? {" "}<Link to="/login"
-            className="text-sky-500" > Inicia sesión</Link>
+            className="text-sky-600" > Inicia sesión</Link>
         </p>
       </div>
     </div>

@@ -42,23 +42,23 @@ const RsvpForm = () => {
   })
 
   return (
-    <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
+    <div className="bg-white max-w-md w-full p-10 rounded-md">
       <h1 className="text-2xl font-bold text-center"> Reservación </h1>
       <form onSubmit={onSubmit}>
         <label htmlFor="title">Titulo</label>
         <input type="text" placeholder='Asistencia'
           {...register('title')}
-          className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
+          className="w-full bg-gray-200 text-black px-4 py-2 rounded-md my-2"
           autoFocus
         />
         <label htmlFor="description">Descripción</label>
         <textarea rows='3' placeholder='Descripción'
           {...register('description')}
-          className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
+          className="w-full bg-gray-200 text-black px-4 py-2 rounded-md my-2"
         ></textarea>
         <label htmlFor="date">Fecha</label>
         <input type="date" {...register("date")}
-          className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2" />
+          className="w-full bg-gray-200 text-black px-4 py-2 rounded-md my-2" />
 
         <button className="w-full py-2 mt-3 mb-10 bg-green-600 text-white font-semibold rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600">Reservar</button>
       </form>
