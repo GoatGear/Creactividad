@@ -8,6 +8,7 @@ import { sendConfirmationEmail } from '../services/email.service.js';
 import { buildPDF } from '../services/pdfQr.service.js';
 import fs from 'fs';
 import path from 'path';
+
 export const register = async (req, res) => {
     const { email, password, username, role = 'user' } = req.body;
 
@@ -24,6 +25,7 @@ export const register = async (req, res) => {
             role,
         });
         const userSaved = await newUser.save();
+
         const qrCodeText = `${userSaved.id}`;
         const qrCodeImage = await qrcode.toDataURL(qrCodeText); // Genera el QR como base64
         userSaved.qrcodeImage = qrCodeImage; // Guarda el QR en base64
@@ -32,7 +34,7 @@ export const register = async (req, res) => {
         const baseDir = 'src/services/';
         const filePath = path.join(baseDir, 'qrcode', `pdf_${userSaved._id}.pdf`);
 
-        // Asegúrate de que el directorio existe
+        // Directorio
         if (!fs.existsSync(path.dirname(filePath))) {
             fs.mkdirSync(path.dirname(filePath), { recursive: true });
         }
@@ -44,7 +46,7 @@ export const register = async (req, res) => {
                 (data) => writeStream.write(data), 
                 async () => {
                     writeStream.end();
-                    resolve(); // Resuelve la promesa cuando el PDF se completa
+                    resolve(); 
                 }
             );
         });
@@ -52,7 +54,7 @@ export const register = async (req, res) => {
         // Envía el correo de confirmación con el PDF adjunto
         await sendConfirmationEmail(userSaved, filePath);
 
-        // Ahora crea el token y envía la respuesta al cliente
+        // Crea el token y envía la respuesta al cliente
         const token = await createAccessToken({ id: userSaved._id, role: userSaved.role });
         res.cookie('token', token);
         res.json({

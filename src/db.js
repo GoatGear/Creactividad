@@ -1,8 +1,9 @@
 import mongoose from 'mongoose'
+import { MONGO_API_K } from '../src/config.js';
 
 export const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb+srv://edgardoierr:R9r8Heojd0cwmO6V@mongodb1.ni1xbm8.mongodb.net/');
+        await mongoose.connect(MONGO_API_K);
         console.log("Ready")
     } catch (error) {
         console.log(error);
