@@ -3,15 +3,19 @@ import mongoose from "mongoose";
 const rsvpSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true,
+        default: 'ANCISSSTE - 2da Reunión Regional'
     },
     description: {
         type: String,
-        required: true,
+        default: ' 7 al 9 de Noviembre - Hotel MS Milenium by Hilton, San Pedro Garza García, N.L.'
+    },
+    reservacion: {
+        type: String,
+        require: true
     },
     date: {
         type: Date,
-        default: Date.now,
+        default: Date.now
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,

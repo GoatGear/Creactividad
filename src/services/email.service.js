@@ -1,24 +1,19 @@
 import { Resend } from 'resend';
 import { apikey } from '../config.js';
-import fs from 'fs';
 
 const resend = new Resend(apikey);
 
-export const sendConfirmationEmail = async (user, filePath) => {
+export const sendConfirmationEmail = async (user) => {
     try {
-        // Leer el archivo PDF en formato de buffer
-        // const fileBuffer = fs.readFileSync(filePath);
-
         await resend.emails.send({
             from: 'contacto@accesos.site',
-            to: user.email,
+            to: user.correo,
             subject: 'Confirmación de Registro',
             html: `
-                <p>Hola ${user.username},</p>
-                <p>Gracias por registrarte.</p>>`,
+                <p>Bienvenido ${user.profesion} ${user.nombre} ${user.apellido},</p>
+                <p>Gracias por registrarse.</p>`
         });
-
-        console.log('Correo enviado con PDF adjunto');
+        console.log('Correo enviado');
     } catch (error) {
         console.error('Error enviando el correo de confirmación:', error);
         throw error;

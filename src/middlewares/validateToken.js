@@ -5,7 +5,7 @@ export const authRequired = (req, res, next) => {
     const token = req.cookies.token;
 
     if (!token) {
-        return res.status(401).json({ message: 'No token' });
+        return res.status(401).json({ message: 'No hay token' });
     }
 
     jwt.verify(token, TOKEN_SECRET, (err, decoded) => {

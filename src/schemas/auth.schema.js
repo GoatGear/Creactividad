@@ -1,10 +1,19 @@
 import { z } from "zod";
 
 export const registerSchema = z.object({
-    username: z.string({
+    nombre: z.string({
         required_error: 'Nombre de usuario requerido'
     }),
-    email: z.string({
+    apellido: z.string({
+        required_error: 'Apellido de usuario requerido'
+    }),
+    profesion: z.string({
+        required_error: 'Profesion de usuario requerido'
+    }),
+    especialidad: z.string({
+        required_error: 'Especialidad de usuario requerido'
+    }),
+    correo: z.string({
         required_error: 'Correo requerido'
     }).email({
         message: 'Correo no válido'
@@ -16,7 +25,7 @@ export const registerSchema = z.object({
 })
 
 export const loginSchema = z.object({
-    email: z.string({
+    correo: z.string({
         required_error: "Correo requerido",
     }).email({
         message: "Correo no valido",
