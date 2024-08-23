@@ -11,8 +11,8 @@ const app = express();
 
 app.use(cors({
     //origin: ['https://eleddie.com', 'https://www.eleddie.com'],
-    origin: '*'
-    // credentials: true,
+    origin: '*',
+    credentials: true,
 }));
 app.use(morgan('dev'));
 app.use(express.json());
