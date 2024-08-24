@@ -10,7 +10,7 @@ import emailRoutes from "./routes/email.routes.js";
 const app = express();
 
 app.use(cors({
-    origin: ['https://eleddie.com', 'https://www.eleddie.com'],    
+    origin: ['https://eleddie.com', 'https://www.eleddie.com', 'https://someec.eleddie.com'],    
 }));
 app.use(morgan('dev'));
 app.use(express.json());
