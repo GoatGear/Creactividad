@@ -60,7 +60,6 @@ export const register = async (req, res) => {
 
         // Crea el token y envía la respuesta al cliente
         const token = await createAccessToken({ id: userSaved._id, role: userSaved.role });
-        res.cookie('token', token);
         res.json({
             id: userSaved._id,
             nombre: userSaved.nombre,
@@ -69,6 +68,7 @@ export const register = async (req, res) => {
             especialidad: userSaved.especialidad,
             correo: userSaved.correo,
             role: userSaved.role,
+            token: token, // token
             createdAt: userSaved.createdAt,
             updatedAt: userSaved.updatedAt
         });
@@ -91,7 +91,6 @@ export const login = async (req, res) => {
         if (!isMatch) return res.status(400).json({ message: "Contraseña incorrecta" });
 
         const token = await createAccessToken({ id: userFound._id, role: userFound.role });
-        res.cookie('token', token)
         res.json({
             id: userFound._id,
             nombre: userFound.nombre,
@@ -99,6 +98,7 @@ export const login = async (req, res) => {
             especialidad: userFound.especialidad,
             correo: userFound.correo,
             role: userFound.role,
+            token: token, // token
             createdAt: userFound.createdAt,
             updatedAt: userFound.updatedAt
         });
@@ -111,6 +111,7 @@ export const logout = (req, res) => {
     res.cookie('token', "", {
         expires: new Date(0)
     })
+    
     return res.sendStatus(200);
 };
 
@@ -133,7 +134,8 @@ export const profile = async (req, res) => {
 }
 
 export const verifyToken = async (req, res) => {
-    const { token } = req.cookies
+    console.info(req.headers);
+    const { token } = req.headers;
     if (!token) return res.status(401).json({ message: "No autorizado no tok" });
     jwt.verify(token, TOKEN_SECRET, async (err, user) => {
         if (err) return res.status(401).json({ message: 'No autorizado' });
