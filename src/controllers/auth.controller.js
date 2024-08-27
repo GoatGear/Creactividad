@@ -58,6 +58,7 @@ export const register = async (req, res) => {
         // Envía el correo de confirmación con el PDF adjunto
         await sendConfirmationEmail(userSaved);
 
+
         // Crea el token y envía la respuesta al cliente
         const token = await createAccessToken({ id: userSaved._id, role: userSaved.role });
         res.json({
