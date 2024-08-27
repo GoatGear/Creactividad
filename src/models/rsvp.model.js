@@ -13,6 +13,10 @@ const rsvpSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    beca: {
+        type: String,
+        require: false
+    },
     a1: {
         type: Boolean,
         require: false,
