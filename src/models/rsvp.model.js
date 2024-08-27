@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const rsvpSchema = new mongoose.Schema({
     title: {
         type: String,
-        default: 'SOMEEC - Curso Internacional de arritmias y marcapasos.'
+        default: 'SOMEEC - Curso Internacional de Arritmias y Marcapasos.'
     },
     description: {
         type: String,
