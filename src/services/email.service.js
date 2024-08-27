@@ -10,10 +10,76 @@ export const sendConfirmationEmail = async (user) => {
             to: user.correo,
             subject: 'Confirmación de Registro',
             html: `
-                <p>Bienvenido ${user.profesion} ${user.nombre} ${user.apellido},</p>
-                <p>Gracias por registrarse.</p>
-                <img src="https://raw.githubusercontent.com/GoatGear/FrontendCreactividad/main/public/someec.png" alt="Imagen de Bienvenida" style="width:100%; max-width:600px;">
-                `
+            <!DOCTYPE html>
+            <html lang="es">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Bienvenido</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f4f4f4;
+                        margin: 0;
+                        padding: 0;
+                    }
+                    .container {
+                        width: 100%;
+                        max-width: 600px;
+                        margin: 0 auto;
+                        background-color: #ffffff;
+                        padding: 20px;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    }
+                    .header {
+                        text-align: center;
+                        padding: 10px 0;
+                        background-color: #0073e6;
+                        color: #ffffff;
+                        font-size: 24px;
+                    }
+                    .content {
+                        margin: 20px 0;
+                        line-height: 1.6;
+                    }
+                    .content p {
+                        margin: 10px 0;
+                    }
+                    .content img {
+                        width: 100%;
+                        max-width: 100%;
+                        height: auto;
+                        border-radius: 8px;
+                    }
+                    .footer {
+                        text-align: center;
+                        padding: 10px 0;
+                        font-size: 14px;
+                        color: #777777;
+                        border-top: 1px solid #dddddd;
+                        margin-top: 20px;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        ¡Bienvenido!
+                    </div>
+                    <div class="content">
+                        <p>Hola <strong>${user.profesion} ${user.nombre} ${user.apellido}</strong>,</p>
+                        <p>Se ha registrado exitosamente al <strong>Curso Internacional de Arritmias y Marcapasos, Monterrey</strong> que se realizará el <strong>23, 24 y 25 de Septiembre</strong> en el <strong>Show Center Airó, N.L.</strong></p>
+                        <img src="https://raw.githubusercontent.com/GoatGear/FrontendCreactividad/main/public/someec.png" alt="Imagen de Bienvenida">
+                        <p></p>
+                        <p>¡Lo esperamos!</p>
+                    </div>
+                    <div class="footer">
+                        &copy; 2024.
+                    </div>
+                </div>
+            </body>
+            </html>
+            `
         });
         console.log('Correo enviado');
     } catch (error) {
