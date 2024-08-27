@@ -13,6 +13,21 @@ const rsvpSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    a1: {
+        type: Boolean,
+        require: false,
+        default: false
+    },
+    a2: {
+        type: Boolean,
+        require: false,
+        default: false
+    },
+    a3: {
+        type: Boolean,
+        require: false,
+        default: false
+    },
     date: {
         type: Date,
         default: Date.now

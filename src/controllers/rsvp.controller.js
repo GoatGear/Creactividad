@@ -15,12 +15,15 @@ export const getRsvps = async (req, res) => {
 };
 
 export const createRsvp = async (req, res) => {
-    const { title, description, reservacion, date } = req.body;
+    const { title, description, reservacion, a1, a2, a3, date } = req.body;
     try {
         const newRsvp = new Rsvp({
             title,
             description,
             reservacion,
+            a1,
+            a2,
+            a3,
             date,
             user: req.user.id,
         })
