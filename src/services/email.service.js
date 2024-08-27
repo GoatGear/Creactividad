@@ -12,7 +12,7 @@ export const sendConfirmationEmail = async (user) => {
             html: `
                 <p>Bienvenido ${user.profesion} ${user.nombre} ${user.apellido},</p>
                 <p>Gracias por registrarse.</p>
-                <img src="https://raw.githubusercontent.com/GoatGear/FrontendSomeec/main/public/someec.png?token=GHSAT0AAAAAACTAJJKMELVI47MANRW7KUUUZWOAXGQ" alt="Imagen de Bienvenida" style="width:100%; max-width:600px;">
+                <img src="https://raw.githubusercontent.com/GoatGear/FrontendCreactividad/main/public/banner.jpg" alt="Imagen de Bienvenida" style="width:100%; max-width:600px;">
                 `
         });
         console.log('Correo enviado');
