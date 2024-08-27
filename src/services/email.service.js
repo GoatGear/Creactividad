@@ -11,7 +11,9 @@ export const sendConfirmationEmail = async (user) => {
             subject: 'Confirmación de Registro',
             html: `
                 <p>Bienvenido ${user.profesion} ${user.nombre} ${user.apellido},</p>
-                <p>Gracias por registrarse.</p>`
+                <p>Gracias por registrarse.</p>
+                <img src="https://raw.githubusercontent.com/GoatGear/FrontendAncissste/main/public/banner.jpg?token=GHSAT0AAAAAACTAJJKMUPUOQX477HRZWKX4ZWNIQJA" alt="Imagen de Bienvenida" style="width:100%; max-width:600px;">
+                `
         });
         console.log('Correo enviado');
     } catch (error) {
