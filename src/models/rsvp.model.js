@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 const rsvpSchema = new mongoose.Schema({
     title: {
         type: String,
-        default: 'ANCISSSTE - 2da Reunión Regional'
+        default: 'SOMEEC - Curso Internacional de arritmias y marcapasos.'
     },
     description: {
         type: String,
-        default: ' 7 al 9 de Noviembre - Hotel MS Milenium by Hilton, San Pedro Garza García, N.L.'
+        default: ' 23, 24 y 25 de Septiembre - Show Center Airó, N.L.'
     },
     reservacion: {
         type: String,
