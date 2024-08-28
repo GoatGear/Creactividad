@@ -69,7 +69,7 @@ export const sendConfirmationEmail = async (user) => {
                 <div class="content">
                     <p>Hola <strong>${user.profesion} ${user.nombre} ${user.apellido}</strong>,</p>
                     <p>Se ha registrado exitosamente al <strong>Curso Internacional de Arritmias y Marcapasos, Monterrey</strong> que se realizará el <strong>23, 24 y 25 de Septiembre</strong> en el <strong>Show Center Airó, N.L.</strong></p>
-                    <p>Recuerda realizar tu pago correspondiente el día del evento en la recepción.</strong></p>
+                    <p>Recuerda hacer uso de tu <strong>Beca</strong> o bien realiza tu pago correspondiente el día del evento en la recepción.</strong></p>
         
                     <!-- Tabla de costos del evento -->
                     <table class="cost-table" style="width: 100%; margin-bottom: 20px; border-collapse: collapse; text-align: left;">
