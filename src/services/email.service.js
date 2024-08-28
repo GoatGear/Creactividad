@@ -62,22 +62,51 @@ export const sendConfirmationEmail = async (user) => {
                 </style>
             </head>
             <body>
-                <div class="container">
-                    <div class="header">
-                        ¡Bienvenido!
-                    </div>
-                    <div class="content">
-                        <p>Hola <strong>${user.profesion} ${user.nombre} ${user.apellido}</strong>,</p>
-                        <p>Se ha registrado exitosamente al <strong>Curso Internacional de Arritmias y Marcapasos, Monterrey</strong> que se realizará el <strong>23, 24 y 25 de Septiembre</strong> en el <strong>Show Center Airó, N.L.</strong></p>
-                        <img src="https://raw.githubusercontent.com/GoatGear/FrontendCreactividad/main/public/someec.png" alt="Imagen de Bienvenida">
-                        <p></p>
-                        <p>¡Lo esperamos!</p>
-                    </div>
-                    <div class="footer">
-                        &copy; 2024.
-                    </div>
+            <div class="container">
+                <div class="header">
+                    ¡Bienvenido!
                 </div>
-            </body>
+                <div class="content">
+                    <p>Hola <strong>${user.profesion} ${user.nombre} ${user.apellido}</strong>,</p>
+                    <p>Se ha registrado exitosamente al <strong>Curso Internacional de Arritmias y Marcapasos, Monterrey</strong> que se realizará el <strong>23, 24 y 25 de Septiembre</strong> en el <strong>Show Center Airó, N.L.</strong></p>
+                    <p>Recuerda realizar tu pago correspondiente el día del evento en la recepción.</strong></p>
+        
+                    <!-- Tabla de costos del evento -->
+                    <table class="cost-table" style="width: 100%; margin-bottom: 20px; border-collapse: collapse; text-align: left;">
+                        <thead>
+                            <tr>
+                                <th style="border-bottom: 2px solid #ddd; padding: 10px;">Categoría</th>
+                                <th style="border-bottom: 2px solid #ddd; padding: 10px;">Costo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border-bottom: 1px solid #ddd; padding: 10px;">Especialistas</td>
+                                <td style="border-bottom: 1px solid #ddd; padding: 10px;">$2,000.00</td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: 1px solid #ddd; padding: 10px;">Residentes</td>
+                                <td style="border-bottom: 1px solid #ddd; padding: 10px;">$1,000.00</td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: 1px solid #ddd; padding: 10px;">Enfermería</td>
+                                <td style="border-bottom: 1px solid #ddd; padding: 10px;">$500.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+        
+                    <!-- Imagen de Bienvenida -->
+                    <img src="https://raw.githubusercontent.com/GoatGear/FrontendCreactividad/main/public/someec.png" alt="Imagen de Bienvenida" style="width: 100%; max-width: 600px; margin: 0 auto; display: block;">
+        
+                    <p></p>
+                    <p>¡Lo esperamos!</p>
+                </div>
+                <div class="footer">
+                    &copy; 2024.
+                </div>
+            </div>
+        </body>
+        
             </html>
             `
         });
