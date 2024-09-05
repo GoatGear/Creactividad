@@ -1,4 +1,6 @@
 import Rsvp from "../models/rsvp.model.js";
+import User from "../models/user.model.js";
+import { sendRsvpEmail } from '../services/emailRsvp.service.js';
 
 export const getRsvps = async (req, res) => {
     try {
@@ -16,6 +18,11 @@ export const getRsvps = async (req, res) => {
 
 export const createRsvp = async (req, res) => {
     const { title, description, reservacion, beca, a1, a2, a3, date } = req.body;
+    const user = await User.findById(req.user.id);
+        if (!user) {
+            return res.status(404).json({ message: "Usuario no encontrado" });
+        }
+        console.log(user);
     try {
         const newRsvp = new Rsvp({
             title,
@@ -28,8 +35,8 @@ export const createRsvp = async (req, res) => {
             date,
             user: req.user.id,
         })
-        const savedRsvp = await newRsvp.save()
-        // enviar correo req.user.email
+        const savedRsvp = await newRsvp.save();
+        //await sendRsvpEmail(user);
         res.json(savedRsvp)
     } catch (error) {
         return res.status(404).json({ message: "No se logró" })

@@ -60,7 +60,14 @@ export const register = async (req, res) => {
 
 
         // Crea el token y envía la respuesta al cliente
-        const token = await createAccessToken({ id: userSaved._id, role: userSaved.role });
+        const token = await createAccessToken({ 
+            id: userSaved._id, 
+            role: userSaved.role,
+            nombre: userSaved.nombre,
+            apellido: userSaved.apellido,
+            especialidad: userSaved.especialidad,
+            correo: userSaved.correo
+        });
         res.json({
             id: userSaved._id,
             nombre: userSaved.nombre,
@@ -91,7 +98,14 @@ export const login = async (req, res) => {
 
         if (!isMatch) return res.status(400).json({ message: "Contraseña incorrecta" });
 
-        const token = await createAccessToken({ id: userFound._id, role: userFound.role });
+        const token = await createAccessToken({ 
+            id: userFound._id, 
+            role: userFound.role,
+            nombre: userFound.nombre,
+            apellido: userFound.apellido,
+            especialidad: userFound.especialidad,
+            correo: userFound.correo
+        });
         res.json({
             id: userFound._id,
             nombre: userFound.nombre,
@@ -128,9 +142,7 @@ export const profile = async (req, res) => {
         profesion: userFound.profesion,
         especialidad: userFound.especialidad,
         correo: userFound.correo,
-        role: userFound.role,
-        createdAt: userFound.createdAt,
-        updatedAt: userFound.updatedAt,
+        role: userFound.role
     });
 }
 
@@ -146,9 +158,10 @@ export const verifyToken = async (req, res) => {
             id: userFound._id,
             nombre: userFound.nombre,
             apellido: userFound.apellido,
-            profesion: userFound.profesion,
+            profesion: userFound.profesion, 
             especialidad: userFound.especialidad,
-            correo: userFound.correo
+            correo: userFound.correo,
+            role: userFound.role
         });
     })
 }

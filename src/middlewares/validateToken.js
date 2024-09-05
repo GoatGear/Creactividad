@@ -13,7 +13,7 @@ export const authRequired = (req, res, next) => {
             return res.status(403).json({ message: 'Token invalido' });
         }
         req.user = decoded; 
-        console.log('Authenticated User:', req.user); 
+        //console.log('Authenticated User:', req.user); 
         next();
     });
 };
