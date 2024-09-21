@@ -7,11 +7,12 @@ import authRoutes from "./routes/auth.routes.js";
 import rsvpRoutes from "./routes/rsvp.routes.js";
 import emailRoutes from "./routes/email.routes.js";
 import becasRoutes from "./routes/beca.routes.js";
+import adminRoutes from "./routes/admin.routes.js";
 
 const app = express();
 
 app.use(cors({
-    origin: ['https://eleddie.com', 'https://www.eleddie.com', 'https://someec.eleddie.com', 'https://someec.accesos.site', 'https://ancissste.accesos.site'],    
+    origin: ['https://eleddie.com', 'https://www.eleddie.com', 'https://someec.eleddie.com', 'https://someec.accesos.site'],    
 }));
 app.use(morgan('dev'));
 app.use(express.json());
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use('/api', authRoutes);
 app.use('/api', rsvpRoutes);
 app.use('/api', emailRoutes);
-app.use('/api', becasRoutes);
+app.use('/api', becasRoutes)
+app.use('/api', adminRoutes);
 
 export default app

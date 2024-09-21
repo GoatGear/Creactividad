@@ -6,6 +6,7 @@ export const getRsvps = async (req, res) => {
     try {
         let rsvps;
         if (req.user.role === "admin") {
+            //console.log(req.user.role)
             rsvps = await Rsvp.find({}).populate('user');
         } else {
             rsvps = await Rsvp.find({ user: req.user.id }).populate('user');
@@ -69,10 +70,10 @@ export const updateRsvp = async (req, res) => {
         const rsvp = await Rsvp.findByIdAndUpdate(req.params.id, req.body, {
             new: true
         })
-        if (!rsvp) return res.status(404).json({ message: 'no encontrada' })
+        if (!rsvp) return res.status(400).json({ message: 'no encontrada' })
         res.json(rsvp)
     } catch (error) {
-        return res.status(404).json({ message: "Reservación no encontrada" })
+        return res.status(500).json({ message: "Reservación no encontrada" })
     }
 
 };
